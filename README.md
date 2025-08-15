@@ -15,20 +15,20 @@ These are descriptions of the actions I did to upgrade a odoo community v18 to t
     
     a) under your "custom" dir, download the enterprise content 
     b) stop and rm the docker running odoo, KEEPING the database docker running
-         - docker ps -a
-         - docker stop odoo-18-COMMUNITY-20250725
-         - docker rm odoo-18-COMMUNITY-20250725
+   			- docker ps -a
+   			- docker stop odoo-18-COMMUNITY-20250725
+   			- docker rm odoo-18-COMMUNITY-20250725
     c) run (once ==> no restart) the docker for enterprise upgrade
-     	- move docker-compose.InstallPonctuelleWebEnterprise.yml  docker-compose.yml
-     	- docker-compose up -d
-     	- follow the logs to verify that upgrade goes smoothly
-     	- docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
-     	- docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
-    d) finally run the docker with enterprise env (still on the existing db) 
-	     - move docker-compose.Enterprise.yml  docker-compose.yml
-     	 - docker-compose up -d
-     	 - follow the logs to verify that upgrade goes smoothly
-     	 - on the interface, parameters, all the way down, verify the current version you are working on
+   			- move docker-compose.InstallPonctuelleWebEnterprise.yml  docker-compose.yml
+   			- docker-compose up -d
+   			- follow the logs to verify that upgrade goes smoothly
+   			- docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
+   			- docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
+    d) finally run the docker with enterprise env (still on the existing db)
+   			- move docker-compose.Enterprise.yml  docker-compose.yml
+   			- docker-compose up -d
+   			- follow the logs to verify that upgrade goes smoothly
+   			- on the interface, parameters, all the way down, verify the current version you are working on
    
 links : 
    odoo Docker images : https://hub.docker.com/_/odoo
