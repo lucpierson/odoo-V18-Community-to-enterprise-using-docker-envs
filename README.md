@@ -9,33 +9,36 @@ Official doc is here : https://www.odoo.com/documentation/18.0/administration/on
 These are descriptions of the actions I did to upgrade a odoo community v18 to the enterprise release, being under docker containers
 
 0) Backup your data (in my case, I have a backup script, gpt can help build yours) 
-1) Upgrade your current env to last V18 release
-2) Download the latest enterprise modules (link below, you need an account as customer or partner) and place the folders under ./custom/
+1) Upgrade your current env to last V18 release (in my case, running docker is odoo-18-COMMUNITY-20250725) 
+2) Download the latest enterprise modules (link below, you need an account as customer or partner) and place the enterprise sub-folders under ./custom/
 3) Create a full env based on V18 called V18-ENT (with provided latest V18 Dokerfile)
     
 
 a) under your "custom" dir, download the enterprise content 
 
-b) stop and rm the docker running odoo, KEEPING the database docker running
+b) stop and rm the docker running odoo, KEEPING the database container running
 
-   			** docker ps -a
-   			** docker stop odoo-18-COMMUNITY-20250725
-   			** docker rm odoo-18-COMMUNITY-20250725
+   			$ docker ps -a
+   			$ docker stop odoo-18-COMMUNITY-20250725
+   			$ docker rm odoo-18-COMMUNITY-20250725
 	
 c) run (once ==> no restart) the docker for enterprise upgrade
 
-   			** move docker-compose.InstallPonctuelleWebEnterprise.yml  docker-compose.yml
-   			** docker-compose up -d
-   			** follow the logs to verify that upgrade goes smoothly
-   			** docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
-   			** docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
+   			$ move docker-compose.InstallPonctuelleWebEnterprise.yml  docker-compose.yml
+   			$ docker-compose up -d
+   			follow the logs to verify that upgrade goes smoothly
+   			$ docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
+   			$ docker stop odoo-18-PONTCUEL-ENTREPRISE-20250725
+	  		KEEP the database container running
    	
 d) finally run the docker with enterprise env (still accessing  on the existing running db)
 
-   			** move docker-compose.Enterprise.yml  docker-compose.yml
-   			** docker-compose up -d
-   			** follow the logs to verify that upgrade goes smoothly
-   			** on the interface, parameters, all the way down, verify the current version you are working on
+   			$ move docker-compose.Enterprise.yml  docker-compose.yml
+   			$ docker-compose up -d
+   			follow the logs to verify that launch the odoo enterprise goes smoothly
+   			on the interface, parameters, all the way down, verify the current version you are working on
+
+e) you may now backup the full ENTERPRISE running env
    
 links : 
   * odoo Docker images : https://hub.docker.com/_/odoo
