@@ -1,1 +1,1 @@
-this is where the odoo logs goes while odoo container is running
+this is where the odoo logs go while odoo container is running
