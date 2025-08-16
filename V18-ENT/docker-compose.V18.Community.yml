@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  odoo-natco: # Configuration du container Odoo
+    image: odoo18-20250725-image:latest # Nom de notre image personnalisée
+    container_name: odoo-18-COMMUNITY-20250725
+    restart: unless-stopped
+    user: root
+    depends_on: 
+      - postgres # L'exécution de notre service dépend de celui de postgres
+    ports:
+      - "8269:8069" # Le port 8269 est exposé pour accéder à l'application Odoo 
+    volumes:
+      - ./:/etc/odoo:z
+      - ./odoo-filestore:/var/lib/odoo/filestore:z
+      - ./custom:/mnt/extra-addons:z
+      - ./logs:/var/log/odoo:z
+
+  postgres: # Configuration de notre service PostgreSQL
+    image: postgres15-5436-image:latest # Image postgres 15 de Docker hub
+    container_name: postgres-5436-natco
+    restart: unless-stopped 
+    environment: 
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data:z
+
+

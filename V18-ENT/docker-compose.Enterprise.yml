@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  odoo-natco: # Configuration du container Odoo
+    image: odoo18-20250725-image:latest # Nom de notre image personnalisée
+    container_name: odoo-18-ENTERPRISE-20250725
+    restart: unless-stopped
+    user: root
+    ports:
+      - "8269:8069" 
+    volumes:
+      - ./:/etc/odoo:z
+      - ./odoo-filestore:/var/lib/odoo/filestore:z
+      - ./custom/enterprise:/mnt/extra-addons:z
+      - ./logs:/var/log/odoo:z
+

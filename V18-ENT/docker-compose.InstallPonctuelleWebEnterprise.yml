@@ -1,0 +1,23 @@
+version: '3'
+
+
+# A LANCER UNE SEULE X, (--stop-after-init) POUR UPDATE LA db 
+
+services:
+  odoo-natco: # Configuration du container Odoo
+    image: odoo18-20250725-image:latest # Nom de notre image personnalisée
+    container_name: odoo-18-PONTCUEL-ENTREPRISE-20250725
+    restart: "no"        
+    user: root
+    ports:
+      - "8269:8069" 
+    command: >
+      odoo 
+      -d natco
+      -i web_enterprise
+      --stop-after-init
+    volumes:
+      - ./:/etc/odoo:z
+      - ./odoo-filestore:/var/lib/odoo/filestore:z
+      - ./custom/enterprise:/mnt/extra-addons:z
+      - ./logs:/var/log/odoo:z
